@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Dashboard{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <p>Student List:</p>
+    {% for student in student_rows %}
+    <ul>
+        <li>Student {{student[0]}}: {{student[2]}} {{student[1]}}</li>
+    </ul>
+    {% endfor %}
+    <p>Quiz List:</p>
+    {% for quiz in quiz_rows %}
+    <ul>
+        <li>Quiz {{quiz[0]}}: {{quiz[1]}}, {{quiz[2]}} questions, taken on {{quiz[3]}}</li>
+    </ul>
+    {% endfor %}
+{% endblock %}
