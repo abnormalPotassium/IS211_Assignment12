@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Add Student's Grades for Quizzes{% endblock %}</h1>
+  <ul>
+    <li><a href="{{ url_for('add_student') }}">Add Student</a></li>
+    <li><a href="{{ url_for('add_quiz') }}">Add Quiz</a></li>
+    <li><a href="{{ url_for('add_results') }}">Add Quiz Result</a></li>
+  </ul>
+{% endblock %}
+
+{% block content %}
+    <form action="/results/add" method="post">
+        Student: <select name="student">
+            {% for student in student_rows %}
+            <option value="{{student[0]}}">{{student[2]}} {{student[1]}}</option>
+            {% endfor %}
+        </select><br/>
+        Quiz: <select name="quiz">
+            {% for quiz in quiz_rows %}
+            <option value="{{quiz[0]}}">{{quiz[1]}}</option>
+            {% endfor %}
+        </select><br/>
+        Quiz Score: <input type="number" name="quiz_score"></input><br/>
+        <input type="submit" value="Add Score">
+    </form>
+{% endblock %}

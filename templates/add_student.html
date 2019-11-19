@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Add Students to Class{% endblock %}</h1>
+  <ul>
+    <li><a href="{{ url_for('add_student') }}">Add Student</a></li>
+    <li><a href="{{ url_for('add_quiz') }}">Add Quiz</a></li>
+    <li><a href="{{ url_for('add_results') }}">Add Quiz Result</a></li>
+  </ul>
+{% endblock %}
+
+{% block content %}
+    <form action="/student/add" method="post">
+        Student Last Name: <input type="text" name="student_last_name"></input><br/>
+        Student First Name: <input type="text" name="student_first_name"></input><br/>
+        <input type="submit" value="Add Student">
+    </form>
+{% endblock %}

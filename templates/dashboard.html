@@ -2,13 +2,18 @@
 
 {% block header %}
   <h1>{% block title %}Dashboard{% endblock %}</h1>
+  <ul>
+    <li><a href="{{ url_for('add_student') }}">Add Student</a></li>
+    <li><a href="{{ url_for('add_quiz') }}">Add Quiz</a></li>
+    <li><a href="{{ url_for('add_results') }}">Add Quiz Result</a></li>
+  </ul>
 {% endblock %}
 
 {% block content %}
     <p>Student List:</p>
     {% for student in student_rows %}
     <ul>
-        <li>Student {{student[0]}}: {{student[2]}} {{student[1]}}</li>
+        <li><a href="/student/{{student[0]}}">Student {{student[0]}}</a>: {{student[2]}} {{student[1]}}</li>
     </ul>
     {% endfor %}
     <p>Quiz List:</p>
