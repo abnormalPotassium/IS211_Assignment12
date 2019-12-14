@@ -5,6 +5,7 @@ from flask import Flask, render_template, request, redirect, session, flash, url
 
 app = Flask(__name__)
 
+@app.route('/', methods= ['GET', 'POST'])
 @app.route('/login', methods= ['GET', 'POST'])
 def login():
     if request.method == 'POST':
