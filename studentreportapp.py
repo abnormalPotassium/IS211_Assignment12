@@ -2,6 +2,9 @@ import functools
 import sqlite3
 from sqlite3 import Error
 from flask import Flask, render_template, request, redirect, session, flash, url_for, g
+import os
+THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+hw12_db = os.path.join(THIS_FOLDER, 'hw12.db')
 
 app = Flask(__name__)
 
@@ -42,7 +45,7 @@ def login_required(view):
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    conn = sqlite3.connect(r'D:\Coding Projects\IS211_Assignment12\hw12.db')
+    conn = sqlite3.connect(hw12_db)
     with conn:
         cur = conn.cursor()
 
@@ -61,7 +64,7 @@ def add_student():
     if request.method == 'POST':
         last = request.form['student_last_name']
         first = request.form['student_first_name']
-        conn = sqlite3.connect(r'D:\Coding Projects\IS211_Assignment12\hw12.db')
+        conn = sqlite3.connect(hw12_db)
         cur = conn.cursor()
         with conn:
             try:
@@ -80,7 +83,7 @@ def add_quiz():
         subject = request.form['quiz_subject']
         questions = request.form['quiz_questions']
         date = request.form['quiz_date']
-        conn = sqlite3.connect(r'D:\Coding Projects\IS211_Assignment12\hw12.db')
+        conn = sqlite3.connect(hw12_db)
         cur = conn.cursor()
         with conn:
             try:
@@ -95,7 +98,7 @@ def add_quiz():
 @app.route('/student/<ID>')
 @login_required
 def view_quiz_results(ID):
-    conn = sqlite3.connect(r'D:\Coding Projects\IS211_Assignment12\hw12.db')
+    conn = sqlite3.connect(hw12_db)
     cur = conn.cursor()
     with conn:
         try:
@@ -117,7 +120,7 @@ def add_results():
         student = request.form['student']
         quiz = request.form['quiz']
         score = request.form['quiz_score']
-        conn = sqlite3.connect(r'D:\Coding Projects\IS211_Assignment12\hw12.db')
+        conn = sqlite3.connect(hw12_db)
         cur = conn.cursor()
         with conn:
             try:
@@ -127,7 +130,7 @@ def add_results():
                 flash(e)
                 return redirect('/results/add')
     
-    conn = sqlite3.connect(r'D:\Coding Projects\IS211_Assignment12\hw12.db')
+    conn = sqlite3.connect(hw12_db)
     cur = conn.cursor()
     with conn:
         cur.execute("SELECT * FROM students")
